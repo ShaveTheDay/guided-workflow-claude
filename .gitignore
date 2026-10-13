@@ -1,0 +1,52 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# uv
+.uv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+
+# Claude Code — ignore session state but track project config
+.claude/*
+!.claude/CLAUDE.md
+!.claude/AGENTS.md
+!.claude/settings.json
+!.claude/skills/
+!.claude/hooks/
+!.claude/agents/
+.claude/settings.local.json
+
+# Test / Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Distribution
+*.whl
+*.tar.gz

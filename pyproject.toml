@@ -1,0 +1,39 @@
+[project]
+name = "project-name"  # Update during discovery
+version = "0.1.0"
+description = ""  # Update during discovery
+requires-python = ">=3.11"
+dependencies = []  # Add with: uv add <package>
+
+# Development tools (not installed by end users). Add with: uv add --dev <package>
+[dependency-groups]
+dev = [
+    "ruff",
+    "pytest",
+]
+
+# ----- uv Configuration -----
+# package = false: this is an application, not an installable package, so uv
+# does not try to build and install it. If the project should be installable
+# (e.g., a library published to PyPI), remove this line and add a [build-system]
+# table during discovery.
+
+[tool.uv]
+package = false
+
+# ----- Ruff Configuration -----
+# Defaults from the global ~/.claude/CLAUDE.md. Override in the project's .claude/CLAUDE.md if needed.
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "D"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+# ----- Pytest Configuration -----
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -3,7 +3,9 @@
 > **This file is the only record of this step.** Claude writes it immediately
 > after the user approves the step's plan in plan mode. The approved plan text
 > is pasted into the final `## Approved Plan` section, which is append-only
-> from then on (enforced by `.claude/hooks/guard_edits.py`).
+> from then on (enforced by `.claude/hooks/guard_edits.py`). Demote every
+> heading in the pasted plan two levels (`##`→`####`) so it nests under
+> `### Approved — <timestamp>` and is not mistaken for a template section.
 >
 > **Timestamp rules — read before editing this file:**
 >
@@ -53,7 +55,8 @@ N/A — Initial plan.
 <!--   1. Take the timestamp from the injected system time.                  -->
 <!--   2. Append a revision sub-section here (format below).                 -->
 <!--   3. Append the revised plan text to the Approved Plan section under    -->
-<!--      `### Plan Revision — <same timestamp>`.                            -->
+<!--      `### Plan Revision — <same timestamp>`, headings demoted two       -->
+<!--      levels.                                                            -->
 <!--   4. Refresh `Last updated` in the Meta table to the same timestamp.    -->
 <!--                                                                         -->
 <!-- Order: chronological, earliest first. Never edit earlier revisions.     -->
@@ -241,3 +244,5 @@ N/A — step-000 produces no code. The code-level plan for each step is recorded
 <!--   ### Plan Revision — YYYY-MM-DD HH:MM:SS                                 -->
 <!--   followed by the revised plan as re-approved.                            -->
 <!-- Never edit text already in this section.                                  -->
+<!-- Demote every pasted heading two levels (#→###, ##→####, max ######;       -->
+<!-- # lines inside code fences are not headings). Change nothing else.        -->

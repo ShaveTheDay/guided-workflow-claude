@@ -1,7 +1,7 @@
 # Step-Based Project Template
 
 > A folder structure and guided workflow for iterative Python development
-> in Claude Code. Version 20: rules that must always hold are enforced by
+> in Claude Code. Version 21: rules that must always hold are enforced by
 > hooks and permissions, not by instruction text, and each step is planned
 > and built in separate context windows. See `CHANGES.md`.
 
@@ -91,7 +91,8 @@ Claude stops, and you run `/clear` then `/next-step` to begin building.
 
 Each step has exactly one record: `plans/step-NNN-<title>.md`. Immediately after
 you approve a plan, Claude writes this file from `plans/PLAN_TEMPLATE.md` and
-pastes the approved plan into its final **Approved Plan** section. From then on
+pastes the approved plan, with its headings demoted two levels, into its final
+**Approved Plan** section. From then on
 that section is append-only, and once the step is `completed` the whole file is
 frozen. Both rules are enforced by a hook, not by trust.
 

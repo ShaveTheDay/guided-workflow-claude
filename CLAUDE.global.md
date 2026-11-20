@@ -64,7 +64,8 @@ complete, timestamped record in `plans/`.
 2. **Approve** — the user approves the plan; approval exits plan mode.
 3. **Record** — first action after approval: write `plans/step-NNN-<title>.md`
    from `plans/PLAN_TEMPLATE.md`, with the approved plan pasted into its
-   final `## Approved Plan` section. Set status `planned`; update `plans/CURRENT_PLAN`.
+   final `## Approved Plan` section, every heading demoted two levels (see
+   `.claude/AGENTS.md`). Set status `planned`; update `plans/CURRENT_PLAN`.
 4. **Stop.** Planning and building never share a context window. After the
    record is written, tell the user to run `/clear` then `/next-step`. Do not
    start implementing in the same session, even if asked to "go ahead"; say
@@ -87,8 +88,8 @@ a `completed` plan is frozen (enforced).
 
 **Revisions:** if a plan needs a meaningful change mid-step, return to plan
 mode, get approval again, then append `### Plan Revision — <timestamp>` to the
-Approved Plan section and refresh `Last updated`. Revisions are rare; typos
-do not need one.
+Approved Plan section (revised plan below it, headings demoted two levels) and
+refresh `Last updated`. Revisions are rare; typos do not need one.
 
 **Timestamps:** `YYYY-MM-DD HH:MM:SS`, local time, from the system clock. The
 harness injects the current time at the start of every turn and on session

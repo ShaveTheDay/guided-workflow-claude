@@ -87,7 +87,10 @@ def main() -> None:
                      if re.search(rf"^## {re.escape(h)}\s*$", tail, re.M)]
             if stray:
                 problems.append("`## Approved Plan` must be the last template section; "
-                                f"found after it: {', '.join(stray)}.")
+                                f"found after it: {', '.join(stray)}. If that heading "
+                                "is inside the pasted plan, it is harmless and cannot "
+                                "be edited now (the section is append-only): tell the "
+                                "user, and demote pasted headings two levels next time.")
 
         meta = re.search(r"\|\s*Last updated\s*\|\s*([^|]+)\|", text)
         if meta:

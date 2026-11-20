@@ -55,6 +55,13 @@ changes without confirmation; `baseline/` is never modified after the snapshot.
      conversation, including every user decision in User Inputs & Decisions.
   3. Paste the approved plan, as approved, into the final `## Approved Plan`
      section under `### Approved — <timestamp>`. It is append-only from then on.
+     **When pasting, demote every heading two levels** (`#`→`###`, `##`→`####`,
+     …, capped at `######`; `#` lines inside code fences are code, not
+     headings). Change nothing else. The pasted headings then nest under the
+     `###` heading, and a pasted `## Objective` is not read by `check_plan.py`
+     as a misplaced template section — a mistake that cannot be corrected
+     once written, because the section is append-only. The same rule applies
+     to a `### Plan Revision — <timestamp>` paste.
   4. Set status `planned`, set `Created` and `Last updated`, update `plans/CURRENT_PLAN`.
   5. **Stop.** Tell the user the plan is recorded and that building starts in a
      fresh context: `/clear`, then `/next-step`. Do not begin implementation in

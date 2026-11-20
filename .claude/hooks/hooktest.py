@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression test for the v19 template hooks. Usage: hooktest.py <template dir>"""
+"""Regression test for the v21 template hooks. Usage: hooktest.py <template dir>"""
 import json, os, re, shutil, subprocess, sys, tempfile, datetime, pathlib
 
 SRC = pathlib.Path(sys.argv[1]).resolve()
@@ -101,6 +101,17 @@ populate_plan(fresh_p := fresh(), "step-000-initial.md", "planned", approved="")
 r = hook(fresh_p, "check_plan.py", {"tool_name": "Edit", "tool_input": {"file_path": "plans/step-000-initial.md"}})
 ctx = (r or {}).get("hookSpecificOutput", {}).get("additionalContext", "")
 ok = "is empty" in ctx; print(("ok   " if ok else "FAIL ") + "check_plan: empty approved section reported"); ok or fails.append("check_plan empty")
+# v21: headings in the pasted plan are demoted two levels. Template-named
+# headings at #### pass; an undemoted ## Objective is flagged with the hint.
+p6 = fresh(); set_onboarded(p6, "true")
+populate_plan(p6, "step-000-initial.md", "completed", approved="#### Objective\n\nDo it.\n\n#### Tasks — Prioritised\n\n- x\n")
+r = hook(p6, "check_plan.py", {"tool_name": "Edit", "tool_input": {"file_path": "plans/step-000-initial.md"}})
+ok = r is None; print(("ok   " if ok else "FAIL ") + "check_plan: silent on demoted template headings in approved"); ok or fails.append("check_plan demoted")
+p7 = fresh(); set_onboarded(p7, "true")
+populate_plan(p7, "step-000-initial.md", "completed", approved="## Objective\n\nDo it.\n")
+r = hook(p7, "check_plan.py", {"tool_name": "Edit", "tool_input": {"file_path": "plans/step-000-initial.md"}})
+ctx = (r or {}).get("hookSpecificOutput", {}).get("additionalContext", "")
+ok = "found after it: Objective" in ctx and "append-only" in ctx; print(("ok   " if ok else "FAIL ") + "check_plan: undemoted ## Objective flagged with hint"); ok or fails.append("check_plan undemoted")
 
 # ---------- 4. session kinds ----------
 p4 = fresh(); set_onboarded(p4, "true"); populate_plan(p4, "step-000-initial.md", "completed")

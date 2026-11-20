@@ -89,7 +89,8 @@ for timestamps (run `date '+%Y-%m-%d %H:%M:%S'` if more than 10 minutes have pas
 5. `plans/step-000-initial.md`: Meta (`Created`, `Last updated`), every
    section from discovery and the high-level plan, every user decision in
    User Inputs & Decisions, and the approved onboarding plan pasted under
-   `## Approved Plan` → `### Approved — <timestamp>`.
+   `## Approved Plan` → `### Approved — <timestamp>`, with every heading in
+   the pasted plan demoted two levels (rule in `.claude/AGENTS.md`, Planner).
 6. Confirm `plans/CURRENT_PLAN` contains `step-000-initial.md`.
 
 ## 7. Complete Onboarding

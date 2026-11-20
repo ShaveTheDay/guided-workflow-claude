@@ -1,5 +1,13 @@
 # Changes
 
+## Version 21 (2026-11-21) — heading demotion in the Approved Plan paste
+
+| Area | Change | Found by |
+|------|--------|----------|
+| Approved Plan paste | Every heading in a pasted plan (approval, revision, and the onboarding plan in step-000) is demoted two levels: `#`→`###`, `##`→`####`, capped at `######`; `#` lines inside code fences are left alone. Nothing else in the text changes. The pasted plan's sections now nest under `### Approved — <timestamp>`, and a pasted `## Objective` no longer matches `check_plan.py`'s stray-template-section check. The hook is unchanged and as strict as before. The rule applies at paste time because the append-only section cannot be corrected afterwards. Updated: `.claude/AGENTS.md` (Planner step 3), `CLAUDE.global.md` (loop step 3, Revisions), `/start` §6, `PLAN_TEMPLATE.md` and `step-000-initial.md` (header, revision process, an appended note in the Approved Plan comments), README. Prose only; nothing enforces the demotion. | test: false alarm from `check_plan.py` on a pasted `## Objective` |
+| Hooks | `check_plan.py`: the stray-template-section warning now adds that a heading inside the pasted plan is harmless and cannot be edited (the section is append-only), so Claude tells the user instead of attempting an edit that `guard_edits.py` would deny. The check itself is unchanged. `hooktest.py`: two cases added (92 total) — demoted `#### Objective` / `#### Tasks — Prioritised` in the Approved Plan pass silently; an undemoted `## Objective` is flagged with the new hint. Docstring updated to v21. | review: a missed demotion could not be corrected |
+| Hooks (note) | `guard_bash.py` refuses any `python3` command naming `.claude/hooks/`, so Claude cannot run the test suite. The user runs it: `! python3 .claude/hooks/hooktest.py .` | test |
+
 ## Version 20 (2026-10-08) — findings from the second live test (a Go project)
 
 | Area | Change | Found by |

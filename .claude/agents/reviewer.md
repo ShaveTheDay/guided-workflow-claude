@@ -36,6 +36,11 @@ full. The sections that matter most:
 6. Look for anything missed, partially done, or newly broken.
 7. If `baseline/` exists and the step modifies existing behaviour, compare
    `src/` against `baseline/` for unintended changes.
+8. Check simplicity. Flag speculative additions the plan did not require —
+   an interface or abstract class with one implementation, a factory or
+   registry with one user, configuration nothing sets, generality the
+   objective does not call for — as `minor` issues, or `major` when they
+   add real complexity. Name the simpler version.
 
 Do not stop at the first failure. Grade every criterion.
 
@@ -75,4 +80,5 @@ blocker issues. Never soften a fail.
 - Do not fix anything. Do not write files. Do not run git write commands.
 - Do not re-plan the step or propose the next step.
 - Do not grade against standards that are not in the plan, the global
-  instructions, or `samples/`.
+  instructions, or `samples/`. The simplicity check (step 8) applies the
+  Planner's "simplest thing that works" rule in `.claude/AGENTS.md`.

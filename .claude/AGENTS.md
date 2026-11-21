@@ -47,6 +47,12 @@ changes without confirmation; `baseline/` is never modified after the snapshot.
 - Draft the next step in plan mode: objective, decisions, tasks with
   priorities (P0 must, P1 should, P2 could), files to create or modify,
   dependencies, risks, verification criteria.
+- **Simplest thing that works.** Every task must trace to `plans/000-goal.md`
+  or the step's objective. Choose the simplest solution that satisfies it:
+  no abstractions, interfaces, factory patterns or configurability for
+  hypothetical future needs. If a task only serves a possible later need,
+  defer it. If the scope looks wider than the goal or the last step, offer
+  `/replan`.
 - Ask clarifying questions with AskUserQuestion before submitting the plan;
   never use it for the approval itself.
 - **Immediately after approval, before any other change:**
@@ -87,6 +93,8 @@ changes without confirmation; `baseline/` is never modified after the snapshot.
 - Something not covered by the plan: stop and present the options with
   AskUserQuestion, recommendation first. If it changes the plan meaningfully,
   return to plan mode and follow the revision process (global rules).
+- If the work is growing beyond the plan or drifting from the goal, stop
+  and offer `/replan`.
 - Follow code standards and `samples/`. Read `baseline/` for original
   behaviour; all changes go in `src/`.
 - Write tests for non-trivial logic.

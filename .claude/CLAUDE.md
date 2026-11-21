@@ -68,8 +68,8 @@ project-root/
 │   ├── AGENTS.md          ← Role definitions (imported above).
 │   ├── settings.json      ← Plan mode by default; hook registrations.
 │   ├── hooks/             ← Python hooks that enforce the rules (user-maintained).
-│   ├── agents/reviewer.md ← The Reviewer subagent (read-only, fresh context).
-│   └── skills/            ← /start, /next-step, /discovery, /grill-me.
+│   ├── agents/            ← reviewer.md, replan-auditor.md (read-only, fresh context).
+│   └── skills/            ← /start, /next-step, /discovery, /grill-me, /replan.
 │
 ├── pyproject.toml, uv.lock, .gitignore
 │

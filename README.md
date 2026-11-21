@@ -1,7 +1,7 @@
 # Step-Based Project Template
 
 > A folder structure and guided workflow for iterative Python development
-> in Claude Code. Version 21: rules that must always hold are enforced by
+> in Claude Code. Version 22: rules that must always hold are enforced by
 > hooks and permissions, not by instruction text, and each step is planned
 > and built in separate context windows. See `CHANGES.md`.
 
@@ -133,8 +133,8 @@ instruction files) Claude can edit.
 | `.claude/AGENTS.md`      | The four roles: Discoverer, Planner, Implementer, Reviewer.  |
 | `.claude/settings.json`  | Plan mode by default; hook registrations.                    |
 | `.claude/hooks/`         | The five enforcement hooks (Python 3, standard library).     |
-| `.claude/agents/`        | The `reviewer` subagent.                                     |
-| `.claude/skills/`        | `/start`, `/next-step`, `/discovery`, `/grill-me`.           |
+| `.claude/agents/`        | The `reviewer` and `replan-auditor` subagents.               |
+| `.claude/skills/`        | `/start`, `/next-step`, `/discovery`, `/grill-me`, `/replan`. |
 | `plans/`                 | Goal, discovery notes, and every step plan.                  |
 | `src/`, `tests/`, `scripts/` | Your code.                                               |
 | `docs/`                  | Your reference material, data, and outputs.                  |
@@ -191,7 +191,7 @@ rule is wrong for your project, edit the hook in `.claude/hooks/` yourself.
 **Hooks don't seem to run.** Check that `python3` works in the terminal where
 Claude Code runs, and that `.claude/settings.json` is the project copy from this
 template. Run `claude --debug` to see hook output. To test the hooks themselves,
-run `python3 .claude/hooks/hooktest.py .` from the project root (90 checks).
+run `python3 .claude/hooks/hooktest.py .` from the project root (92 checks).
 
 **You want to change the plan mid-step.** Return to plan mode and tell Claude
 what should change. After re-approval, Claude appends a Plan Revision.
@@ -199,3 +199,9 @@ what should change. After re-approval, Claude appends a Plan Revision.
 **You want to roll back to a previous step.** See `.claude/CLAUDE.md` § Rollback Procedure.
 
 **You want to stress-test a plan.** Run `/grill-me`.
+
+**The work is drifting from the goal, or getting over-engineered.** Run
+`/replan` in plan mode, at any status. An independent read-only subagent
+re-checks every step against `plans/000-goal.md`, flags speculative
+abstractions and configuration, and proposes what to keep, cut or defer.
+You decide; the result is recorded in the step plan. No code is changed.

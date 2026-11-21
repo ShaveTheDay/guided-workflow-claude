@@ -12,6 +12,7 @@
 | `next-step` | `/next-step` | Start or resume a step on an onboarded project. Injects time, active plan, status and git state, then enters the right role. |
 | `discovery` | `/discovery` | Structured project clarification. Run by `/start`; not a first command. |
 | `grill-me` | `/grill-me` | Relentless one-at-a-time interview to stress-test a plan or design. Optional deep dive during discovery. |
+| `replan` | `/replan` | Refocus when work drifts from the goal or the last plan. Runs the read-only `replan-auditor` subagent (fresh context): re-anchors on the goal, traces every step, flags speculative over-engineering, proposes keep / cut / defer. No code changes; outcomes go into the step plan. Any status. |
 
 ## Skill File Format
 

@@ -1,5 +1,15 @@
 # Changes
 
+## Version 22 (2026-11-21) — `/replan` and the "simplest thing that works" rule
+
+| Area | Change | Found by |
+|------|--------|----------|
+| `/replan` (new) | `.claude/skills/replan/SKILL.md`. Refocuses a project when work drifts, either step by step from the goal or towards speculative design (abstractions, interfaces, factories, configurability for needs nobody stated). Runs in plan mode at any status. Makes no code changes. Spawns the `replan-auditor` subagent and passes it only the plan path, the user's reason and unrecorded user decisions, never the main session's reasoning. Then asks the user about each cut or defer item. Outcome by status: `planned`/`in-progress` → normal Plan Revision, then stop for `/clear` and `/next-step` (found in the dry run: the hooks treat recording the revision as planning); `implemented` → issues alongside the review; `completed`/`rolled-back` → feeds the next step's objective and Changes from Previous Plan. Deferred items are recorded as accepted risks. A rollback is only pointed to, never started. One record: no separate replan file. | user request |
+| `replan-auditor` (new) | `.claude/agents/replan-auditor.md`. Read-only and fresh context, modelled on `reviewer`. Anchors on the goal, "done" test and Out of Scope list. Traces each step plan (Objective, Changes, Deviations, Model Reasoning, P2) and says whose decision widened scope. Scans code for single-implementation abstractions, unused config and unrequested generality. Marks current tasks keep/cut/defer and defers when unsure. A user decision is never cut silently. Verdict ON COURSE / DRIFTING / OFF COURSE. May only remove or simplify, never add scope. | user request |
+| Prevention | `.claude/AGENTS.md` Planner: new "Simplest thing that works" bullet. Every task traces to the goal or the step objective, nothing is added for hypothetical needs, and Claude offers `/replan` when scope widens. Implementer: a matching bullet, so Claude offers `/replan` when the work drifts mid-step. `.claude/agents/reviewer.md`: new step 8, which flags speculative additions as `minor`/`major` issues, and a matching Boundaries note. Global Code Standards unchanged. | user decision |
+| Docs | Skills README table, README (version line, template table, troubleshooting entry, hook-test count corrected from 90 to 92), `.claude/CLAUDE.md` project structure. | review |
+| Hooks | Unchanged. The existing guards already allow everything `/replan` writes. | — |
+
 ## Version 21 (2026-11-21) — heading demotion in the Approved Plan paste
 
 | Area | Change | Found by |
